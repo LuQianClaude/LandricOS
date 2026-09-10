@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.application' version '8.2.2'
+}
+
+android {
+    namespace 'com.jasmine.landricsvilla'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.jasmine.landricsvilla"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        release {
+            // Keep minify disabled so the WebView + JS bridge stays easy to debug.
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Bundle the local web frontend that the WebView loads when offline.
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets']
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.webkit:webkit:1.9.0'
+}

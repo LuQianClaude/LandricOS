@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<!-- Settings - the central config page. No hardcoded keys.
+     Flow: pick provider -> enter API key + base URL -> Fetch Models -> pick model -> Test -> Save. -->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>设置 - LandricsVilla</title>
+  <link rel="stylesheet" href="/frontend/css/theme.css" />
+  <link rel="stylesheet" href="/frontend/css/main.css" />
+  <link rel="stylesheet" href="/frontend/css/mobile.css" />
+  <link rel="stylesheet" href="/frontend/pages/chat/chat.css" />
+</head>
+<body class="app-shell">
+  <main class="app-content" id="settings-root">
+    <header class="page-head">
+      <h1 class="page-head__title">设置</h1>
+      <p class="page-head__sub">配置账户、AI 模型、记忆与 MCP 工具</p>
+    </header>
+
+    <!-- ===== Account ===== -->
+    <section class="card rise" id="sec-account">
+      <h2 class="card__title">账户</h2>
+      <div id="account-state">
+        <p class="muted" id="account-guest">尚未登录。请在下方登录或注册以保存配置与对话。</p>
+        <form id="auth-form" class="col" style="max-width:380px">
+          <div class="row" style="gap:var(--space-2)">
+            <button type="button" class="btn btn--sm" id="auth-mode-toggle">切换为注册</button>
+          </div>
+          <div class="field">
+            <label class="field__label" for="auth-username">用户名</label>
+            <input class="input" id="auth-username" name="username" autocomplete="username" required />
+          </div>
+          <div class="field">
+            <label class="field__label" for="auth-password">密码</label>
+            <input class="input" id="auth-password" type="password" name="password" autocomplete="current-password" required />
+          </div>
+          <div class="field" id="email-field" hidden>
+            <label class="field__label" for="auth-email">邮箱（可选）</label>
+            <input class="input" id="auth-email" name="email" type="email" autocomplete="email" />
+          </div>
+          <div class="row">
+            <button type="submit" class="btn btn--primary" id="auth-submit">登录</button>
+            <span class="inline-msg hidden" id="auth-msg"></span>
+          </div>
+        </form>
+        <div id="account-logged" class="col hidden" style="max-width:380px">
+          <p>已登录为 <strong id="account-name"></strong></p>
+          <form class="col" id="profile-form">
+            <div class="field">
+              <label class="field__label" for="profile-display">显示名</label>
+              <input class="input" id="profile-display" name="display_name" />
+            </div>
+            <div class="row">
+              <button type="submit" class="btn btn--sm" id="profile-save">保存资料</button>
+              <button type="button" class="btn btn--sm btn--danger" id="logout-btn">退出登录</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AI Model (KEY) ===== -->
+    <section class="card rise" id="sec-model">
+      <h2 class="card__title">AI 模型</h2>
+      <p class="card__desc">输入你自己的 API Key 与 Base URL，然后拉取可用模型。密钥仅保存在本地，不会被硬编码。</p>
+
+      <div class="badge badge--primary badge--dot" id="active-model-badge" style="margin:var(--space-3) 0">
+        当前模型：<span id="active-model-name">未设置</span>
+      </div>
+
+      <form id="model-form" class="col" style="max-width:520px">
+        <div class="field">
+          <label class="field__label" for="provider">服务商</label>
+          <select class="select" id="provider" name="provider">
+            <option value="openai">OpenAI</option>
+            <option value="coze">Coze</option>
+            <option value="gemini">Gemini</option>
+            <option value="claude">Claude</option>
+            <option value="minimax">MiniMax</option>
+            <option value="custom">Custom OpenAI-compatible</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="api-key">API Key</label>
+          <input class="input" id="api-key" name="api_key" type="password" placeholder="sk-..." autocomplete="off" />
+          <span class="field__hint">密码类型输入，不会明文显示。仅发送给后端用于拉取/测试。</span>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="base-url">Base URL</label>
+          <input class="input" id="base-url" name="base_url" placeholder="https://api.openai.com/v1" />
+          <span class="field__hint" id="base-url-hint">默认指向 OpenAI 官方端点。</span>
+        </div>
+
+        <div class="row stack-on-mobile" style="flex-wrap:wrap">
+          <button type="button" class="btn btn--primary" id="fetch-models-btn">
+            <span id="fetch-icon"></span> 拉取模型
+          </button>
+          <span class="inline-msg hidden" id="fetch-msg"></span>
+        </div>
+
+        <div class="field" id="model-list-field" hidden>
+          <label class="field__label" for="model-select">选择模型</label>
+          <select class="select" id="model-select" name="model"></select>
+          <span class="field__hint" id="model-count"></span>
+        </div>
+
+        <div class="row stack-on-mobile" style="flex-wrap:wrap">
+          <button type="submit" class="btn btn--primary" id="save-model-btn">保存配置</button>
+          <button type="button" class="btn" id="test-model-btn">测试连接</button>
+          <span class="inline-msg hidden" id="model-msg"></span>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== Memory ===== -->
+    <section class="card rise" id="sec-memory">
+      <h2 class="card__title">记忆</h2>
+      <form id="memory-settings" class="col" style="max-width:520px">
+        <div class="field">
+          <label class="field__label" for="mem-depth">记忆深度（条数）</label>
+          <input class="input" id="mem-depth" type="number" min="4" max="200" value="20" />
+          <span class="field__hint">单次对话携带的近期上下文长度。</span>
+        </div>
+        <div class="field">
+          <label class="field__label" for="mem-sensitivity">回忆敏感度</label>
+          <input class="input" id="mem-sensitivity" type="range" min="0" max="100" value="60" />
+          <span class="field__hint" id="mem-sensitivity-val">60</span>
+        </div>
+        <button type="submit" class="btn btn--primary btn--sm" style="align-self:flex-start">保存记忆设置</button>
+      </form>
+    </section>
+
+    <!-- ===== MCP Tools ===== -->
+    <section class="card rise" id="sec-mcp">
+      <h2 class="card__title">MCP 工具</h2>
+      <p class="card__desc">启用或禁用 AI 可调用的工具。</p>
+      <div id="mcp-list" class="col">
+        <p class="muted">加载中...</p>
+      </div>
+    </section>
+
+    <!-- ===== Theme ===== -->
+    <section class="card rise" id="sec-theme">
+      <h2 class="card__title">主题</h2>
+      <div class="row row--between">
+        <span>外观模式</span>
+        <label class="switch" aria-label="切换深色/浅色主题">
+          <input type="checkbox" id="theme-switch" />
+          <span class="switch__slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="card rise" id="sec-about">
+      <h2 class="card__title">关于</h2>
+      <div class="col" style="gap:var(--space-1)">
+        <p><strong>LandricsVilla</strong> <span class="muted">v0.1.0</span></p>
+        <p class="muted">local-first AI companion villa. Memory-as-state, multi-model, MCP tools.</p>
+        <p class="muted">作者：Jasmine · MIT License 2026</p>
+        <p class="muted">灵感源于 AionsHome 自托管 AI 陪伴理念。</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/frontend/js/api.js"></script>
+  <script src="/frontend/js/app.js"></script>
+  <script>
+    /* Settings page logic - model fetch flow lives here.
+       All state read from window.LVApi. No hardcoded keys. */
+    (function () {
+      "use strict";
+      var A = window.LVApi;
+      var esc = window.LVApp.escapeHtml;
+      var toast = window.LVApp.toast;
+
+      // Provider -> default base URL hint
+      var DEFAULTS = {
+        openai: "https://api.openai.com/v1",
+        coze: "https://api.coze.com",
+        gemini: "https://generativelanguage.googleapis.com/v1",
+        claude: "https://api.anthropic.com",
+        minimax: "https://api.minimax.chat/v1",
+        custom: ""
+      };
+
+      function $(id) { return document.getElementById(id); }
+      function showMsg(el, text, kind) {
+        el.textContent = text;
+        el.className = "inline-msg inline-msg--" + (kind === "ok" ? "ok" : "err");
+      }
+      function hideMsg(el) { el.className = "inline-msg hidden"; el.textContent = ""; }
+
+      // ---- Account ----
+      var registerMode = false;
+      function refreshAccount() {
+        var user = A.getUser();
+        var token = A.getToken();
+        if (user && token) {
+          $("account-guest").classList.add("hidden");
+          $("auth-form").classList.add("hidden");
+          $("account-logged").classList.remove("hidden");
+          $("account-name").textContent = user.display_name || user.username || "用户";
+          $("profile-display").value = user.display_name || "";
+        } else {
+          $("account-guest").classList.remove("hidden");
+          $("auth-form").classList.remove("hidden");
+          $("account-logged").classList.add("hidden");
+        }
+      }
+
+      $("auth-mode-toggle").addEventListener("click", function () {
+        registerMode = !registerMode;
+        $("auth-submit").textContent = registerMode ? "注册" : "登录";
+        $("auth-mode-toggle").textContent = registerMode ? "切换为登录" : "切换为注册";
+        $("email-field").hidden = !registerMode;
+      });
+
+      $("auth-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var data = {
+          username: $("auth-username").value.trim(),
+          password: $("auth-password").value
+        };
+        if (registerMode && $("auth-email").value) data.email = $("auth-email").value.trim();
+        var msgEl = $("auth-msg"); hideMsg(msgEl);
+        $("auth-submit").disabled = true;
+        A.Auth[registerMode ? "register" : "login"](data).then(function (res) {
+          if (res && res.access_token) A.setToken(res.access_token);
+          if (res && res.user) A.setUser(res.user);
+          else A.setUser({ username: data.username });
+          toast("登录成功", "ok");
+          refreshAccount();
+        }).catch(function (err) {
+          showMsg(msgEl, err.message || "登录失败", "err");
+        }).then(function () { $("auth-submit").disabled = false; });
+      });
+
+      $("profile-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        A.Auth.updateMe({ display_name: $("profile-display").value }).then(function (u) {
+          A.setUser(u || Object.assign({}, A.getUser(), { display_name: $("profile-display").value }));
+          refreshAccount();
+          toast("资料已更新", "ok");
+        }).catch(function (err) { toast(err.message, "error"); });
+      });
+
+      $("logout-btn").addEventListener("click", function () {
+        A.Auth.logout();
+        refreshAccount();
+        toast("已退出登录");
+      });
+
+      // ---- AI Model (KEY flow) ----
+      function providerDefault() { return DEFAULTS[$("provider").value] || ""; }
+
+      $("provider").addEventListener("change", function () {
+        $("base-url-hint").textContent = "默认端点：" + (providerDefault() || "自定义");
+        if (!$("base-url").value) $("base-url").value = providerDefault();
+      });
+
+      $("api-key").addEventListener("input", function () {
+        // Reset fetched model list when key changes
+        $("model-list-field").hidden = true;
+        $("model-select").innerHTML = "";
+      });
+      $("base-url").addEventListener("input", function () {
+        $("model-list-field").hidden = true;
+        $("model-select").innerHTML = "";
+      });
+
+      // The core action: fetch models via POST /api/models/list
+      $("fetch-models-btn").addEventListener("click", function () {
+        var provider = $("provider").value;
+        var apiKey = $("api-key").value.trim();
+        var baseUrl = $("base-url").value.trim() || providerDefault();
+        var msgEl = $("fetch-msg"); hideMsg(msgEl);
+        if (!apiKey) { showMsg(msgEl, "请先填写 API Key", "err"); return; }
+        var btn = $("fetch-models-btn"); btn.disabled = true;
+        $("fetch-icon").innerHTML = '<span class="spinner"></span>';
+        A.Models.fetchModels(provider, apiKey, baseUrl).then(function (models) {
+          var sel = $("model-select");
+          sel.innerHTML = models.map(function (m) {
+            return '<option value="' + esc(m) + '">' + esc(m) + "</option>";
+          }).join("");
+          $("model-list-field").hidden = models.length === 0;
+          $("model-count").textContent = "拉取到 " + models.length + " 个模型";
+          if (!models.length) showMsg(msgEl, "未返回模型，请检查 Key/URL", "err");
+          else showMsg(msgEl, "拉取成功", "ok");
+        }).catch(function (err) {
+          showMsg(msgEl, err.message || "拉取失败", "err");
+        }).then(function () {
+          btn.disabled = false;
+          $("fetch-icon").textContent = "";
+        });
+      });
+
+      $("test-model-btn").addEventListener("click", function () {
+        var msgEl = $("model-msg"); hideMsg(msgEl);
+        var model = $("model-select").value;
+        if (!model) { showMsg(msgEl, "请先拉取并选择模型", "err"); return; }
+        var btn = $("test-model-btn"); btn.disabled = true;
+        A.Models.test({
+          provider: $("provider").value,
+          api_key: $("api-key").value.trim(),
+          base_url: $("base-url").value.trim() || providerDefault(),
+          model: model
+        }).then(function () {
+          showMsg(msgEl, "连接成功", "ok");
+        }).catch(function (err) {
+          showMsg(msgEl, err.message || "连接失败", "err");
+        }).then(function () { btn.disabled = false; });
+      });
+
+      $("model-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var msgEl = $("model-msg"); hideMsg(msgEl);
+        var model = $("model-select").value;
+        if (!model) { showMsg(msgEl, "请先拉取并选择模型", "err"); return; }
+        var btn = $("save-model-btn"); btn.disabled = true;
+        A.Models.saveConfig({
+          provider: $("provider").value,
+          api_key: $("api-key").value.trim(),
+          base_url: $("base-url").value.trim() || providerDefault(),
+          model: model
+        }).then(function () {
+          window.LVApp.state.activeModel = model;
+          $("active-model-name").textContent = model;
+          try { localStorage.setItem("lv_active_model", model); } catch (e) {}
+          showMsg(msgEl, "已保存", "ok");
+        }).catch(function (err) {
+          showMsg(msgEl, err.message || "保存失败", "err");
+        }).then(function () { btn.disabled = false; });
+      });
+
+      // Restore active model from local cache (display only; key never stored in frontend)
+      try {
+        var cached = localStorage.getItem("lv_active_model");
+        if (cached) $("active-model-name").textContent = cached;
+      } catch (e) {}
+
+      // ---- Memory settings ----
+      $("mem-sensitivity").addEventListener("input", function () {
+        $("mem-sensitivity-val").textContent = this.value;
+      });
+      $("memory-settings").addEventListener("submit", function (e) {
+        e.preventDefault();
+        try {
+          localStorage.setItem("lv_mem_depth", $("mem-depth").value);
+          localStorage.setItem("lv_mem_sens", $("mem-sensitivity").value);
+        } catch (e) {}
+        toast("记忆设置已保存", "ok");
+      });
+      (function restoreMem() {
+        try {
+          var d = localStorage.getItem("lv_mem_depth");
+          var s = localStorage.getItem("lv_mem_sens");
+          if (d) $("mem-depth").value = d;
+          if (s) { $("mem-sensitivity").value = s; $("mem-sensitivity-val").textContent = s; }
+        } catch (e) {}
+      })();
+
+      // ---- MCP tools ----
+      A.Mcp.tools().then(function (tools) {
+        tools = (tools && (tools.tools || tools)) || [];
+        var box = $("mcp-list");
+        if (!tools.length) { box.innerHTML = '<p class="muted">暂无可用工具。</p>'; return; }
+        box.innerHTML = tools.map(function (t, i) {
+          var name = typeof t === "string" ? t : (t.name || t.id || "tool");
+          var desc = typeof t === "string" ? "" : (t.description || "");
+          var checked = t.enabled === false ? "" : "checked";
+          return '<div class="row row--between card" style="padding:var(--space-3)">' +
+            '<div class="col" style="gap:2px"><strong>' + esc(name) + "</strong>" +
+            (desc ? '<span class="muted" style="font-size:12px">' + esc(desc) + "</span>" : "") +
+            "</div>" +
+            '<label class="switch"><input type="checkbox" ' + checked +
+            ' data-mcp="' + esc(name) + '"><span class="switch__slider"></span></label>' +
+            "</div>";
+        }).join("");
+      }).catch(function () {
+        $("mcp-list").innerHTML = '<p class="muted">无法加载 MCP 工具列表。</p>';
+      });
+
+      // ---- Theme ----
+      (function () {
+        var sw = $("theme-switch");
+        var theme = window.LVApp.getTheme();
+        sw.checked = theme === "light";
+        sw.addEventListener("change", function () {
+          window.LVApp.applyTheme(this.checked ? "light" : "dark");
+        });
+      })();
+
+      refreshAccount();
+    })();
+  </script>
+</body>
+</html>

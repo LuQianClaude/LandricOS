@@ -1,0 +1,2 @@
+# Migration scripts live here.
+# Run them via scripts/deploy.sh or the backend migration entrypoint.

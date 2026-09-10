@@ -1,0 +1,87 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.eggs/
+*.egg-info/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ---- Node / frontend ----
+node_modules/
+frontend/dist/
+frontend/.parcel-cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---- Android ----
+android/.gradle/
+android/local.properties
+android/build/
+android/app/build/
+android/app/release/
+android/captures/
+android/.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.keystore
+*.jks
+keystore.properties
+
+# ---- IDE ----
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
+# ---- Env / secrets ----
+.env
+.env.*
+!.env.example
+
+# ---- Runtime data (kept as .gitkeep dirs) ----
+storage/users/*
+storage/photos/*
+storage/audio/*
+storage/videos/*
+storage/memories/*
+storage/generated_music/*
+!storage/**/.gitkeep
+
+database/*.db
+database/*.db-journal
+database/*.db-wal
+database/*.db-shm
+
+models/embedding/*
+models/voice/*
+models/music/*
+!models/**/.gitkeep
+
+# ---- Logs ----
+logs/
+*.log

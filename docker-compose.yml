@@ -1,0 +1,31 @@
+# LandricsVilla single-service deployment.
+#
+# Usage:
+#   docker-compose up --build
+#
+# AI provider keys are NOT configured here. After the server starts, log in
+# through the web UI and add your provider key + base URL in Settings.
+
+services:
+  landricsvilla:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: landricsvilla:latest
+    container_name: landricsvilla
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./storage:/app/storage
+      - ./database:/app/database
+      - ./models:/app/models
+    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

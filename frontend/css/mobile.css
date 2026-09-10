@@ -1,0 +1,54 @@
+/* ==========================================================================
+   LandricsVilla - Mobile-first responsive adjustments
+   Breakpoints: <768px phone, 768-1024 tablet, >=1024 desktop sidebar visible
+   ========================================================================== */
+
+/* Phone (default): hide sidebar, show bottom nav, single column */
+@media (max-width: 767px) {
+  .app-layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .bottom-nav { display: block; }
+  .app-content {
+    padding: var(--space-4) var(--space-4) calc(var(--space-8) + var(--bottom-nav-h));
+  }
+  .page-head__title { font-size: var(--fs-xl); }
+  .grid--2 { grid-template-columns: 1fr; }
+  .grid--cards { grid-template-columns: 1fr; }
+  .stack-on-mobile { flex-direction: column; align-items: stretch; }
+  .full-on-mobile { width: 100%; }
+}
+
+/* Tablet: show sidebar narrow, hide some bottom nav items */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root { --sidebar-w: 200px; }
+  .grid--cards { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+}
+
+/* Desktop: full sidebar, no bottom nav */
+@media (min-width: 1024px) {
+  .bottom-nav { display: none; }
+}
+
+/* Small phone: tighten spacing */
+@media (max-width: 380px) {
+  :root { --fs-2xl: 22px; --fs-xl: 18px; }
+  .app-content { padding-left: var(--space-3); padding-right: var(--space-3); }
+}
+
+/* Landscape phones: shorter bottom nav */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 480px) {
+  :root { --bottom-nav-h: 52px; }
+}
+
+/* Chat layout becomes full height on mobile */
+@media (max-width: 767px) {
+  .chat-layout { grid-template-columns: 1fr; }
+  .chat-sidebar { display: none; }
+  .chat-sidebar.is-open { display: flex; }
+}
+
+/* Touch-friendly: bigger tap targets on coarse pointers */
+@media (pointer: coarse) {
+  .nav-link { padding: var(--space-3) var(--space-4); }
+  .btn { min-height: 40px; }
+}

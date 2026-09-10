@@ -1,0 +1,97 @@
+/* ==========================================================================
+   LandricsVilla - Theme tokens (CSS custom properties)
+   Dark theme primary, light theme via [data-theme="light"].
+   No emojis. Calm teal/indigo palette.
+   ========================================================================== */
+
+:root {
+  /* Core surfaces - dark theme */
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-2: #1c2330;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --primary: #2dd4bf;          /* calm teal */
+  --primary-hover: #14b8a6;
+  --accent: #818cf8;           /* soft indigo accent */
+  --border: rgba(255, 255, 255, 0.08);
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+  /* Extended palette */
+  --primary-soft: rgba(45, 212, 191, 0.12);
+  --accent-soft: rgba(129, 140, 248, 0.14);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.12);
+  --warning: #fbbf24;
+  --success: #34d399;
+  --overlay: rgba(0, 0, 0, 0.55);
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, monospace;
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-base: 15px;
+  --fs-lg: 17px;
+  --fs-xl: 20px;
+  --fs-2xl: 26px;
+  --fs-3xl: 32px;
+  --lh-tight: 1.25;
+  --lh-base: 1.6;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Layout */
+  --sidebar-w: 248px;
+  --bottom-nav-h: 62px;
+  --maxw: 1180px;
+
+  /* Motion */
+  --t-fast: 120ms;
+  --t: 200ms;
+  --t-slow: 320ms;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Effects */
+  --grad-hero: radial-gradient(1200px 600px at 80% -10%, rgba(129, 140, 248, 0.16), transparent 60%),
+    radial-gradient(900px 500px at 0% 0%, rgba(45, 212, 191, 0.12), transparent 55%);
+  --ring: 0 0 0 3px rgba(45, 212, 191, 0.35);
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --surface-2: #eef1f5;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+  --border: rgba(0, 0, 0, 0.08);
+  --primary-soft: rgba(45, 212, 191, 0.16);
+  --accent-soft: rgba(129, 140, 248, 0.18);
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.08);
+  --overlay: rgba(15, 23, 42, 0.4);
+  --grad-hero: radial-gradient(1200px 600px at 80% -10%, rgba(129, 140, 248, 0.2), transparent 60%),
+    radial-gradient(900px 500px at 0% 0%, rgba(45, 212, 191, 0.16), transparent 55%);
+  --ring: 0 0 0 3px rgba(20, 184, 166, 0.3);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-fast: 0ms;
+    --t: 0ms;
+    --t-slow: 0ms;
+  }
+}
