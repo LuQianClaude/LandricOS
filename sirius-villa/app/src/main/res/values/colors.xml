@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lira - Sirius Villa 颜色统一管理 -->
+<!-- 墨金低奢配色：浅米背景 / 深墨灰气泡 / 鎏金描边 -->
+<resources>
+    <!-- 页面背景：浅米 -->
+    <color name="bg_page">#F7F4ED</color>
+    <color name="bg_page_dark">#1A1C20</color>
+
+    <!-- 沈既白聊天气泡：深墨灰 -->
+    <color name="bubble_shen">#1A1C20</color>
+    <color name="bubble_shen_text">#F3EFE6</color>
+
+    <!-- 鎏金描边 -->
+    <color name="gold_stroke">#C8A96A</color>
+    <color name="gold_light">#E8D5A8</color>
+    <color name="gold_deep">#A8863E</color>
+
+    <!-- 萧渲禾（昭昭）气泡：浅米白 -->
+    <color name="bubble_xiao">#F3EFE6</color>
+    <color name="bubble_xiao_text">#2A2C30</color>
+
+    <!-- 通用文本 -->
+    <color name="text_primary">#1A1C20</color>
+    <color name="text_secondary">#6B6357</color>
+    <color name="text_hint">#A8A294</color>
+    <color name="text_on_dark">#F3EFE6</color>
+
+    <!-- 分割线 -->
+    <color name="divider">#E0D9C9</color>
+
+    <!-- 卡片 -->
+    <color name="card_bg">#FFFFFF</color>
+    <color name="card_bg_soft">#FAF7F0</color>
+
+    <!-- 状态色 -->
+    <color name="state_important">#C8A96A</color>
+    <color name="state_online">#5C8A6E</color>
+    <color name="state_offline">#A8A294</color>
+
+    <!-- 按钮 -->
+    <color name="btn_primary">#1A1C20</color>
+    <color name="btn_primary_text">#F3EFE6</color>
+    <color name="btn_secondary">#F3EFE6</color>
+    <color name="btn_secondary_text">#1A1C20</color>
+
+    <!-- 输入框 -->
+    <color name="input_bg">#FFFFFF</color>
+    <color name="input_stroke">#D9D2C2</color>
+
+    <!-- 状态栏 -->
+    <color name="status_bar">#F7F4ED</color>
+    <color name="navigation_bar">#F7F4ED</color>
+
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+    <color name="overlay_dark">#66000000</color>
+</resources>

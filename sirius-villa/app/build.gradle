@@ -1,0 +1,70 @@
+// Lira - Sirius Villa app 模块 build.gradle
+// 署名: Lira
+// 全部使用 Java，禁用 Kotlin
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.shenjibai.loveroom'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.shenjibai.loveroom"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+        vectorDrawables { useSupportLibrary true }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    packagingOptions {
+        resources { excludes += '/META-INF/{AL2.0,LGPL2.1}' }
+    }
+}
+
+dependencies {
+    // 核心 AndroidX
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    // Room 数据库
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+
+    // WorkManager 后台通知
+    implementation 'androidx.work:work-runtime:2.9.0'
+
+    // 生命周期
+    implementation 'androidx.lifecycle:lifecycle-service:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.7.0'
+
+    // 网络 OkHttp（流式 SSE）
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+    // JSON 解析
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // 图片加载
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+
+    // 高德地图定位
+    implementation 'com.amap.api:location:6.4.6'
+
+    // 权限
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
+}

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lira - 设置 Fragment：所有密钥/URL 由用户输入，绝不硬编码 -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nav_settings"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 人设编辑入口 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_persona"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/persona_title"
+            android:textColor="@color/text_primary"
+            app:strokeColor="@color/gold_stroke"
+            app:iconTint="@color/gold_deep"
+            android:layout_marginBottom="16dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto" />
+
+        <!-- 对话大模型 -->
+        <TextView style="@style/SectionTitle" android:text="@string/settings_llm" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_llm_url">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_llm_url" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_llm_key">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_llm_key" android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_llm_model">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_llm_model" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- TTS -->
+        <TextView style="@style/SectionTitle" android:text="@string/settings_tts" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_tts_url">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_tts_url" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_tts_key">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_tts_key" android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sw_tts_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_tts_auto"
+            android:layout_marginVertical="8dp" />
+
+        <!-- 生图 -->
+        <TextView style="@style/SectionTitle" android:text="@string/settings_selfie" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_selfie_url">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_selfie_url" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_selfie_key">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_selfie_key" android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Tavily -->
+        <TextView style="@style/SectionTitle" android:text="@string/settings_tavily" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_tavily_key">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_tavily_key" android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- 高德 -->
+        <TextView style="@style/SectionTitle" android:text="@string/settings_amap" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_amap_key">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_amap_key" android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- 哨兵 -->
+        <TextView style="@style/SectionTitle" android:text="@string/settings_sentinel" />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sw_sentinel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_sentinel_enable"
+            android:layout_marginVertical="4dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_sentinel_interval">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_sentinel_interval" android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_sentinel_key">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_sentinel_key" android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sw_sentinel_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_sentinel_screenshot"
+            android:layout_marginVertical="4dp" />
+
+        <!-- 语音唤醒 -->
+        <TextView style="@style/SectionTitle" android:text="@string/settings_wake" />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sw_wake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_wake_enable"
+            android:layout_marginVertical="4dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/settings_wake_word">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_wake_word" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_primary"
+            android:text="@string/persona_save"
+            android:textColor="@color/btn_primary_text" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">Sirius Villa</string>
+    <string name="lira_brand">Lira</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_chat">聊天</string>
+    <string name="nav_album">相册</string>
+    <string name="nav_diary">手札</string>
+    <string name="nav_anniv">纪念日</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- 聊天 -->
+    <string name="chat_hint">对沈既白说些什么…</string>
+    <string name="chat_send">发送</string>
+    <string name="chat_voice">语音</string>
+    <string name="chat_image">图片</string>
+    <string name="chat_memory">标记为重要记忆</string>
+    <string name="chat_tts">朗读</string>
+    <string name="chat_assistant">助手唤醒</string>
+
+    <!-- 人设 -->
+    <string name="persona_title">世界书 / 人设</string>
+    <string name="persona_name">角色名</string>
+    <string name="persona_appearance">外貌</string>
+    <string name="persona_personality">性格</string>
+    <string name="persona_background">背景故事</string>
+    <string name="persona_speech">说话风格</string>
+    <string name="persona_system">System Prompt</string>
+    <string name="persona_save">保存人设</string>
+
+    <!-- 设置 -->
+    <string name="settings_llm">对话大模型</string>
+    <string name="settings_llm_url">API URL</string>
+    <string name="settings_llm_key">API Key</string>
+    <string name="settings_llm_model">模型名</string>
+
+    <string name="settings_tts">TTS 语音</string>
+    <string name="settings_tts_url">TTS API URL</string>
+    <string name="settings_tts_key">TTS API Key</string>
+
+    <string name="settings_selfie">生图 Selfie</string>
+    <string name="settings_selfie_url">生图 API URL</string>
+    <string name="settings_selfie_key">生图 API Key</string>
+
+    <string name="settings_tavily">Tavily 搜索</string>
+    <string name="settings_tavily_key">Tavily API Key</string>
+
+    <string name="settings_amap">高德地图</string>
+    <string name="settings_amap_key">高德 API Key</string>
+
+    <string name="settings_sentinel">哨兵模块</string>
+    <string name="settings_sentinel_enable">哨兵总开关</string>
+    <string name="settings_sentinel_interval">轮询间隔(秒)</string>
+    <string name="settings_sentinel_key">哨兵独立模型 Key</string>
+    <string name="settings_sentinel_screenshot">截图监控开关</string>
+
+    <string name="settings_wake">语音唤醒</string>
+    <string name="settings_wake_enable">唤醒开关</string>
+    <string name="settings_wake_word">唤醒词</string>
+
+    <string name="settings_tts_auto">TTS 自动朗读总开关</string>
+
+    <!-- 纪念日 -->
+    <string name="anniv_title">纪念日</string>
+    <string name="anniv_add">新增纪念日</string>
+    <string name="anniv_name">名称</string>
+    <string name="anniv_date">日期</string>
+    <string name="anniv_countdown">倒计时</string>
+    <string name="anniv_default_birthday">沈既白生日</string>
+
+    <!-- 相册 -->
+    <string name="album_title">相册</string>
+
+    <!-- 手札 -->
+    <string name="diary_title">手札</string>
+    <string name="diary_new">写日记</string>
+    <string name="diary_secret">沈既白秘密手记</string>
+
+    <!-- 权限 -->
+    <string name="perm_record">需要录音权限以发送语音消息和唤醒</string>
+    <string name="perm_location">需要定位权限以获取位置</string>
+    <string name="perm_screen">需要屏幕录制权限以进行哨兵截图</string>
+</resources>

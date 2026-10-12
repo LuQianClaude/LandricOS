@@ -1,0 +1,134 @@
+/* Lira - 桌面端样式表：墨金低奢 */
+/* 署名: Lira */
+
+.root {
+    -fx-background-color: #F7F4ED;
+    -fx-font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* 侧边栏 */
+.sidebar {
+    -fx-background-color: #1A1C20;
+    -fx-padding: 20 12;
+    -fx-spacing: 4;
+}
+
+.brand {
+    -fx-text-fill: #C8A96A;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 4px;
+    -fx-padding: 0 0 20 8;
+}
+
+.nav-item {
+    -fx-text-fill: #A8A294;
+    -fx-font-size: 14px;
+    -fx-padding: 10 12;
+    -fx-cursor: hand;
+}
+
+.nav-item:hover {
+    -fx-text-fill: #E8D5A8;
+}
+
+.nav-active {
+    -fx-text-fill: #C8A96A;
+    -fx-background-color: rgba(200, 169, 106, 0.12);
+    -fx-border-color: #C8A96A;
+    -fx-border-width: 0 0 0 3;
+}
+
+/* 聊天视图 */
+.chat-view {
+    -fx-background-color: #F7F4ED;
+}
+
+.chat-scroll {
+    -fx-background-color: transparent;
+}
+
+.chat-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+/* 气泡 */
+.bubble {
+    -fx-padding: 12 16;
+    -fx-background-radius: 16;
+    -fx-font-size: 15px;
+    -fx-line-spacing: 3px;
+}
+
+.bubble-shen {
+    -fx-background-color: #1A1C20;
+    -fx-text-fill: #F3EFE6;
+    -fx-border-color: #C8A96A;
+    -fx-border-width: 1px;
+    -fx-border-radius: 16;
+    -fx-background-radius: 16 16 16 4;
+    -fx-border-radius: 16 16 16 4;
+}
+
+.bubble-xiao {
+    -fx-background-color: #F3EFE6;
+    -fx-text-fill: #2A2C30;
+    -fx-background-radius: 16 16 4 16;
+}
+
+/* 输入区 */
+.chat-input {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D9D2C2;
+    -fx-border-width: 1px;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 10 14;
+}
+
+.btn-primary {
+    -fx-background-color: #1A1C20;
+    -fx-text-fill: #F3EFE6;
+    -fx-border-color: #C8A96A;
+    -fx-border-width: 1px;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 10 24;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #2A2C30;
+}
+
+/* 设置 */
+.settings-box {
+    -fx-background-color: #F7F4ED;
+}
+
+.section-title {
+    -fx-text-fill: #A8863E;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 0 4 0;
+}
+
+.settings-box .text-field,
+.settings-box .password-field {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D9D2C2;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10 12;
+}
+
+.settings-box .text-area {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D9D2C2;
+    -fx-border-radius: 8;
+}
+
+.settings-box .text-area .content {
+    -fx-background-color: #FFFFFF;
+}

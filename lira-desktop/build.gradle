@@ -1,0 +1,55 @@
+// Lira - 桌面端 build.gradle（JavaFX，打包为 .exe）
+// 署名: Lira
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.14'
+    id 'org.beryx.jlink' version '2.26.0'
+}
+
+group = 'com.shenjibai.lira'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+javafx {
+    version = '17.0.2'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.web', 'javafx.media']
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+}
+
+application {
+    mainClass = 'com.shenjibai.lira.LiraDesktopApp'
+    applicationName = 'Lira'
+}
+
+// jpackage 打包为 .exe（Windows）
+jlink {
+    launcher {
+        name = 'Lira'
+    }
+    jpackage {
+        installerType = 'exe'
+        installerName = 'Lira-Setup'
+        appVersion = '1.0.0'
+        vendor = 'Shenjibai'
+        skipInstaller = false
+        installerOptions = [
+            '--win-per-user-install',
+            '--win-dir-chooser',
+            '--win-menu',
+            '--win-shortcut'
+        ]
+    }
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lira - 世界书/人设编辑页：用户自行填写，不硬编码 -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/persona_title"
+            app:titleTextColor="@color/text_primary" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/persona_name">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/persona_appearance">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_appearance"
+                android:inputType="textMultiLine" android:minLines="2" android:gravity="top" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/persona_personality">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_personality"
+                android:inputType="textMultiLine" android:minLines="3" android:gravity="top" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/persona_background">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_background"
+                android:inputType="textMultiLine" android:minLines="4" android:gravity="top" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/persona_speech">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_speech"
+                android:inputType="textMultiLine" android:minLines="2" android:gravity="top" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LiraInput" android:hint="@string/persona_system">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_system"
+                android:inputType="textMultiLine" android:minLines="5" android:gravity="top" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_primary"
+            android:text="@string/persona_save"
+            android:textColor="@color/btn_primary_text" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lira - Sirius Villa 主题：Material3 墨金低奢 -->
+<resources>
+    <style name="Theme.SiriusVilla" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/gold_deep</item>
+        <item name="colorPrimaryContainer">@color/gold_light</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/gold_stroke</item>
+        <item name="colorSecondaryContainer">@color/card_bg_soft</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="colorSurface">@color/bg_page</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/card_bg_soft</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="android:statusBarColor">@color/bg_page</item>
+        <item name="android:navigationBarColor">@color/navigation_bar</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/bg_page</item>
+    </style>
+
+    <!-- 暗色（23-4点自动暗调） -->
+    <style name="Theme.SiriusVilla.Dark" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/gold_stroke</item>
+        <item name="colorPrimaryContainer">@color/gold_deep</item>
+        <item name="colorOnPrimary">@color/bg_page_dark</item>
+        <item name="colorSurface">@color/bg_page_dark</item>
+        <item name="colorOnSurface">@color/text_on_dark</item>
+        <item name="android:statusBarColor">@color/bg_page_dark</item>
+        <item name="android:navigationBarColor">@color/bg_page_dark</item>
+        <item name="android:windowBackground">@color/bg_page_dark</item>
+    </style>
+</resources>

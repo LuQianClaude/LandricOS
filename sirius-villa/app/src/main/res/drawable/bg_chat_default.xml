@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 默认聊天背景：浅米渐变 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:startColor="#F7F4ED"
+        android:endColor="#EFE9DB"
+        android:angle="135" />
+</shape>

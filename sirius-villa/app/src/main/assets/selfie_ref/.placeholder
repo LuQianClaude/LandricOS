@@ -1,0 +1,3 @@
+Lira - 生图自拍参考锚点图片目录
+将沈既白的参考形象图放入此目录（assets/selfie_ref/）
+generate_selfie skill 会读取第一张作为形象锚点
